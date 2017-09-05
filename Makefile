@@ -6,7 +6,7 @@
 #    By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/18 17:00:45 by dmulish           #+#    #+#              #
-#    Updated: 2017/08/18 17:03:22 by dmulish          ###   ########.fr        #
+#    Updated: 2017/09/05 17:45:48 by dmulish          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = filler
 
 FLAGS = -Wall -Wextra -Werror -I includes/ -g
 
-SRCS = srcs/
+SRCS = srcs/main.c
 
 BINS = $(SRCS:.c=.o)
 
