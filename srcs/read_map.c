@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   filler.h                                           :+:      :+:    :+:   */
+/*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/18 16:56:16 by dmulish           #+#    #+#             */
-/*   Updated: 2017/09/07 18:05:23 by dmulish          ###   ########.fr       */
+/*   Created: 2017/09/07 14:16:52 by dmulish           #+#    #+#             */
+/*   Updated: 2017/09/07 17:32:48 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _FILLER_H
-# define _FILLER_H
+#include "filler.h"
 
-# include "../libft/libft.h"
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-
-typedef struct	s_s
+void	read_map(t_s *s)
 {
-	int			fl;
-	int			x_map;
-	int			y_map;
-	int			x_piece;
-	int			y_piece;
-	int			name_len;
-	char		num;
-	char		*buf;
-	char		*res;
-}				t_s;
+	char	**arr;
 
-void			read_map(t_s *s);
-
-#endif
+	arr = 0;
+	s->buf = (char*)malloc((sizeof(char) * 20) + 1);
+	ft_bzero(s->buf, 20);
+	while (get_next_line(1, &(s->buf)) > 0)
+	{
+		if (!ft_strncmp("Plateau", s->buf, 7))
+		{
+			arr = ft_strsplit(s->buf, ' ');
+			s->x_map = ft_atoi(arr[1]);
+			s->y_map = ft_atoi(arr[2]);
+		}
+	}
+	free(s->buf);
+}

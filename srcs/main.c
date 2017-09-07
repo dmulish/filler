@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 17:55:10 by dmulish           #+#    #+#             */
-/*   Updated: 2017/09/05 17:49:37 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/09/07 18:24:58 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,46 @@
 void	init_str(t_s *s)
 {
 	s = (t_s*)malloc(sizeof(t_s));
-	s->buf = 0;
-	s->num = 0;
 	s->name_len = 0;
+	s->x_piece = 0;
+	s->y_piece = 0;
+	s->x_map = 0;
+	s->y_map = 0;
+	s->buf = 0;
+	s->res = 0;
+	s->num = 0;
+	s->fl = 1;
 }
 
-void	buf_len(t_s *s, int i, char *str1, char *str2)
+void	buf_len(t_s *s, char *param, char *usrname)
 {
-	int	len1;
-	int	len2;
+	printf("|||%s|%s|||0", param, usrname);
+	if (!ft_strcmp("-p1", param))
+		s->name_len = (ft_strstr(usrname, "filler")) ? ft_strlen(usrname) : 0;
+	else if (!ft_strcmp("-p2", param))
+		s->name_len = (ft_strstr(usrname, "filler")) ? ft_strlen(usrname) : 0;
+	write(1, "UUUUUU", 6);
+}
 
-	len1 = 0;
-	len2 = 0;
-	if (!ft_strcmp("-p1", str1))
-		len1 = ft_strlen(str2);
-	else if (!ft_strcmp("-p2", str1))
-		len2 = ft_strlen(str2);
-	if (len1 && len2)
-		s->name_len = (len1 > len2) ? len1 : len2;
-	else
-		i++;
+void	check_usr_num(t_s *s)
+{
+	s->buf = (char*)malloc((sizeof(char) * (s->name_len + 16) + 1));
+	while (get_next_line(1, &(s->buf)) > 0)
+	{
+		if (ft_strstr(s->buf, "exec p1") && ft_strstr(s->buf, "filler"))
+		{
+			s->num = 'o';
+			write(1, "OOOOOOOOOO", 10);
+			break ;
+		}
+		else if (ft_strstr(s->buf, "exec p2") && ft_strstr(s->buf, "filler"))
+		{
+			s->num = 'x';
+			write(1, "XXXXXXXXXX", 10);
+			break ;
+		}
+	}
+	free(s->buf);
 }
 
 int		main(int argc, char **argv)
@@ -42,17 +62,16 @@ int		main(int argc, char **argv)
 	int	i;
 	t_s	s;
 
-	i = 0;
+	i = -1;
 	init_str(&s);
-	while ((i < argc - 1) && !s.name_len)
-		buf_len(&s, i, argv[i], argv[i + 1]);
-	s.buf = (char*)malloc((sizeof(char) * (s.name_len + 16) + 1));
-	while (get_next_line(1, &(s.buf)) > 0)
-	{
-		if (s.buf && !ft_strncmp("$$$ exec p1", s.buf, 11))
-			s.num = 'o';
-		else if (s.buf && !ft_strncmp("$$$ exec p2", s.buf, 11))
-			s.num = 'x';
-	}
+	while ((++i < argc - 1))
+		buf_len(&s, argv[i], argv[i + 1]);
+	check_usr_num(&s);
+	// while (s.fl)
+	// {
+		read_map(&s);
+		// write(1, s.res, ft_strlen(s.res));
+		write(1, "8 2\n", 4);
+	// }
 	return (0);
 }
