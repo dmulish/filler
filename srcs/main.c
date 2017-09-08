@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 17:55:10 by dmulish           #+#    #+#             */
-/*   Updated: 2017/09/07 18:24:58 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/09/08 18:38:52 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,24 @@ void	init_str(t_s *s)
 	s->y_piece = 0;
 	s->x_map = 0;
 	s->y_map = 0;
+	s->piece = 0;
 	s->buf = 0;
-	s->res = 0;
+	s->map = 0;
 	s->num = 0;
-	s->fl = 1;
 }
 
 void	buf_len(t_s *s, char *param, char *usrname)
 {
-	printf("|||%s|%s|||0", param, usrname);
 	if (!ft_strcmp("-p1", param))
-		s->name_len = (ft_strstr(usrname, "filler")) ? ft_strlen(usrname) : 0;
+	{
+		if (ft_strstr(usrname, "[filler]") || ft_strstr(usrname, "[./filler]"))
+			s->name_len = ft_strlen(usrname);
+	}
 	else if (!ft_strcmp("-p2", param))
-		s->name_len = (ft_strstr(usrname, "filler")) ? ft_strlen(usrname) : 0;
-	write(1, "UUUUUU", 6);
+	{
+		if (ft_strstr(usrname, "[filler]") || ft_strstr(usrname, "[./filler]"))
+			s->name_len = ft_strlen(usrname);
+	}
 }
 
 void	check_usr_num(t_s *s)
@@ -41,16 +45,16 @@ void	check_usr_num(t_s *s)
 	s->buf = (char*)malloc((sizeof(char) * (s->name_len + 16) + 1));
 	while (get_next_line(1, &(s->buf)) > 0)
 	{
-		if (ft_strstr(s->buf, "exec p1") && ft_strstr(s->buf, "filler"))
+		if (ft_strstr(s->buf, "exec p1") && (ft_strstr(s->buf, "[filler]")
+			|| ft_strstr(s->buf, "[./filler]")))
 		{
 			s->num = 'o';
-			write(1, "OOOOOOOOOO", 10);
 			break ;
 		}
-		else if (ft_strstr(s->buf, "exec p2") && ft_strstr(s->buf, "filler"))
+		else if (ft_strstr(s->buf, "exec p2") && (ft_strstr(s->buf, "[filler]")
+			|| ft_strstr(s->buf, "[./filler]")))
 		{
 			s->num = 'x';
-			write(1, "XXXXXXXXXX", 10);
 			break ;
 		}
 	}
@@ -67,11 +71,10 @@ int		main(int argc, char **argv)
 	while ((++i < argc - 1))
 		buf_len(&s, argv[i], argv[i + 1]);
 	check_usr_num(&s);
-	// while (s.fl)
-	// {
-		read_map(&s);
-		// write(1, s.res, ft_strlen(s.res));
+	while (1)
+	{
+		read_game(&s);
 		write(1, "8 2\n", 4);
-	// }
+	}
 	return (0);
 }
