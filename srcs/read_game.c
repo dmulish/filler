@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 14:16:52 by dmulish           #+#    #+#             */
-/*   Updated: 2017/09/09 17:49:27 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/09/10 15:06:31 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ void	read_map(t_s *s)
 		else if (!ft_strncmp(s->buf, "Piece", 5)
 			|| s->buf[0] == '.' || s->buf[0] == '*')
 			read_piece(s, &j);
-		if (j == s->y_piece)
+		else if (j == s->y_piece)
 			break ;
 	}
-	find_on_map(s);
+	explor_map(s);
 }
 
 void	read_game(t_s *s)
