@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 17:55:10 by dmulish           #+#    #+#             */
-/*   Updated: 2017/09/10 16:42:57 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/09/12 19:33:07 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	init_str(t_s *s)
 	s->name_len = 0;
 	s->x_piece = 0;
 	s->y_piece = 0;
+	s->res_len = 0;
 	s->x_map = 0;
 	s->y_map = 0;
 	s->piece = 0;
@@ -44,7 +45,7 @@ void	buf_len(t_s *s, char *param, char *usrname)
 void	check_usr_num(t_s *s)
 {
 	s->buf = (char*)malloc((sizeof(char) * (s->name_len + 16) + 1));
-	while (get_next_line(1, &(s->buf)) > 0)
+	while (get_next_line(0, &(s->buf)) > 0)
 	{
 		if (ft_strstr(s->buf, "exec p1") && (ft_strstr(s->buf, "[filler]")
 			|| ft_strstr(s->buf, "[./filler]")))
@@ -75,7 +76,8 @@ int		main(int argc, char **argv)
 	while (1)
 	{
 		read_game(&s);
-		write(1, s.res, s.res_len);
+		// write(1, s.res, s.res_len);
+		write(1, "8 2\n", 4);
 	}
 	return (0);
 }

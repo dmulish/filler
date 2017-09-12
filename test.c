@@ -1,16 +1,36 @@
-#include "filler.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/12 19:14:22 by dmulish           #+#    #+#             */
+/*   Updated: 2017/09/12 19:14:25 by dmulish          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "includes/filler.h"
 
 int		main(void)
 {
-	int x = 2;
-	int y = 10;
-	char	*res;
+	int		fd;
+	char	*buf;
 
-	res = (char*)malloc((sizeof(char) * (ft_strlen(ft_itoa(x))
-		+ ft_strlen(ft_itoa(y)) + 2)) + 1);
-	res = ft_strdup(ft_itoa(x));
-	printf("\"%s\"\n", res);
-	res = ft_strcat(ft_strcat(ft_strcat(res, " "), ft_itoa(y)), "\n");
-	printf("\"%s\"\n", res);
+	fd = open("map.txt", O_RDONLY);
+	buf = (char*)malloc((sizeof(char) * 21) + 1);
+	while (get_next_line(fd, &buf) > 0)
+	{
+		if (!ft_strncmp("Plateau", buf, 7))
+		{
+			printf("1. %s\n", buf);
+			break ;
+		}
+	}
+	while (get_next_line(fd, &buf) > 0)
+	{
+		printf("2. %s\n", buf);
+	}
+	close(fd);
 	return (0);
 }

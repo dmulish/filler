@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 17:48:55 by dmulish           #+#    #+#             */
-/*   Updated: 2017/09/10 16:44:43 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/09/12 16:13:42 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@
 
 char	*get_coord(t_s *s, int x, int y)
 {
-	s->res_len = ft_strlen(ft_itoa(x)) + ft_strlen(ft_itoa(y)) + 2;
+	s->res_len = (int)ft_strlen(ft_itoa(x)) + (int)ft_strlen(ft_itoa(y)) + 2;
 	s->res = (char*)malloc((sizeof(char) * s->res_len) + 1);
-	s->res = ft_strdup(ft_itoa(x));
-	s->res = ft_strcat(s->res, " ");
-	s->res = ft_strcat(s->res, ft_itoa(y));
-	s->res = ft_strcat(s->res, "\n");
+	s->res = ft_strcat(ft_strcat(ft_strcat(ft_strdup(ft_itoa(x)), " "),
+		ft_itoa(y)), "\n");
 	return (s->res);
 }
 
