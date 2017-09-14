@@ -1,5 +1,6 @@
-seed = 3515
-O: error on input
+seed = 2229
+./filler: Segfault at 1
+X: error on input
 players/grati.filler won
 Score:
-0AGAINST0
+1AGAINST9

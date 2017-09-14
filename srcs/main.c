@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 17:55:10 by dmulish           #+#    #+#             */
-/*   Updated: 2017/09/12 19:33:07 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/09/14 13:12:34 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,13 @@ void	check_usr_num(t_s *s)
 	s->buf = (char*)malloc((sizeof(char) * (s->name_len + 16) + 1));
 	while (get_next_line(0, &(s->buf)) > 0)
 	{
-		if (ft_strstr(s->buf, "exec p1") && (ft_strstr(s->buf, "[filler]")
-			|| ft_strstr(s->buf, "[./filler]")))
+		if (ft_strstr(s->buf, "exec p1") && ft_strstr(s->buf, "[./filler]"))
 		{
 			s->num = 'O';
 			break ;
 		}
-		else if (ft_strstr(s->buf, "exec p2") && (ft_strstr(s->buf, "[filler]")
-			|| ft_strstr(s->buf, "[./filler]")))
+		else if (ft_strstr(s->buf, "exec p2") &&
+			ft_strstr(s->buf, "[./filler]"))
 		{
 			s->num = 'X';
 			break ;

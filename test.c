@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 19:14:22 by dmulish           #+#    #+#             */
-/*   Updated: 2017/09/12 19:14:25 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/09/14 16:17:09 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		main(void)
 
 	fd = open("map.txt", O_RDONLY);
 	buf = (char*)malloc((sizeof(char) * 21) + 1);
-	while (get_next_line(fd, &buf) > 0)
+	while (get_next_line(0, &buf) > 0)
 	{
 		if (!ft_strncmp("Plateau", buf, 7))
 		{
@@ -27,7 +27,7 @@ int		main(void)
 			break ;
 		}
 	}
-	while (get_next_line(fd, &buf) > 0)
+	while (get_next_line(0, &buf) > 0)
 	{
 		printf("2. %s\n", buf);
 	}
