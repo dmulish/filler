@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 14:16:52 by dmulish           #+#    #+#             */
-/*   Updated: 2017/09/15 18:24:47 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/09/15 20:28:58 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,31 @@ void	read_map(t_s *s)
 {
 	int		i;
 	int		j;
-	int		k;
+	FILE	*f;
 
-	i = 0;
+	f = fopen("file1.txt", "w");
+	i = -1;
 	j = 0;
-	k = -1;
 	s->buf = (char*)malloc((sizeof(char) * (s->x_map + 4)) + 1);
 	s->map = (char**)malloc((sizeof(char*) * s->y_map) + 1);
-	while (get_next_line(0, &(s->buf)) > 0)
+	while (++i >= 0)
 	{
-		if (ft_isdigit(s->buf[0]) == 1)
-			s->map[i++] = ft_strdup((ft_strsplit(s->buf, ' '))[1]);
-		else
-			read_piece(s, &j);
+		if (get_next_line(0, &(s->buf)) > 0)
+		{
+			if (ft_isdigit(s->buf[0]))
+			{
+				s->map[i] = ft_strdup((ft_strsplit(s->buf, ' '))[1]);
+				fprintf(f, "1%s\n", (ft_strsplit(s->buf, ' '))[1]);
+			}
+			else
+				read_piece(s, &j);
+		}
 		if (s->y_piece && j == s->y_piece)
 			break ;
 	}
+	fclose(f);
 	free(s->buf);
-	explor_map(s);
+	// explor_map(s);
 }
 
 void	read_game(t_s *s)
