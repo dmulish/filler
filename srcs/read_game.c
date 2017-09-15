@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 14:16:52 by dmulish           #+#    #+#             */
-/*   Updated: 2017/09/14 17:53:17 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/09/15 18:24:47 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,52 +14,36 @@
 
 void	read_piece(t_s *s, int *j)
 {
-	if (!ft_strncmp(s->buf, "Piece", 5))
+	if (!ft_strncmp(s->buf, "Piece", 5) && (*j) == 0)
 	{
 		s->x_piece = ft_atoi(ft_strsplit(s->buf, ' ')[2]);
 		s->y_piece = ft_atoi(ft_strsplit(s->buf, ' ')[1]);
 		s->piece = (char**)malloc((sizeof(char) * s->y_piece) + 1);
 	}
-	if (s->buf[0] == '.' || s->buf[0] == '*')
-	{
-		s->piece[*j] = ft_strdup(s->buf);
-	}
-	(*j)++;
+	else if (s->buf[0] == '.' || s->buf[0] == '*')
+		s->piece[(*j)++] = ft_strdup(s->buf);
 }
 
 void	read_map(t_s *s)
 {
-	FILE	*f;
-
-	f = fopen("file1.txt", "w");
 	int		i;
 	int		j;
 	int		k;
 
 	i = 0;
-	j = -1;
+	j = 0;
 	k = -1;
 	s->buf = (char*)malloc((sizeof(char) * (s->x_map + 4)) + 1);
 	s->map = (char**)malloc((sizeof(char*) * s->y_map) + 1);
-	while (++k <= s->y_map)
+	while (get_next_line(0, &(s->buf)) > 0)
 	{
-		if (get_next_line(0, &(s->buf)) > 0)
-		{
-			fprintf(f, "%d) s->buf:	%s\n", k, s->buf);
-			if (ft_isdigit(s->buf[0]))
-			{
-				s->map[i] = ft_strdup((ft_strsplit(s->buf, ' '))[1]);
-				fprintf(f, "%d) s->map:		%s\n", i, s->map[i]);
-				i++;
-			}
-			else if (!ft_strncmp(s->buf, "Piece", 5)
-			|| s->buf[0] == '.' || s->buf[0] == '*')
-				read_piece(s, &j);
-		}
-		if (j == s->y_piece)
+		if (ft_isdigit(s->buf[0]) == 1)
+			s->map[i++] = ft_strdup((ft_strsplit(s->buf, ' '))[1]);
+		else
+			read_piece(s, &j);
+		if (s->y_piece && j == s->y_piece)
 			break ;
 	}
-	fclose(f);
 	free(s->buf);
 	explor_map(s);
 }

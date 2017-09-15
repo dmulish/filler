@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 17:48:55 by dmulish           #+#    #+#             */
-/*   Updated: 2017/09/14 17:49:07 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/09/15 18:27:03 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,16 @@ void	explor_map(t_s *s)
 {
 	int	x;
 	int	y;
-	//
+
 	x = -1;
 	y = -1;
-	// while (++y < s->y_map)
-	// {
-	// 	while (++x < s->x_map)
-	// 	{
-	// 		if ((s->map[y][x] == s->num) && (!s->map[y][x]
-	// 			|| (s->map[y][x] == '.')))
-	// 			s->res = get_coord(s, x, y);
-	// 	}
-	// }
-
-	FILE	*f;
-
-	f = fopen("file.txt", "w");
 	while (++y < s->y_map)
-		fprintf(f, "%d) s->map:	%s\n", y, s->map[y]);
-	// while (++x < s->y_piece)
-	// 	fprintf(f, "%d) s->piece:	%s\n", x, s->piece[x]);
-	fclose(f);
+	{
+		while (++x < s->x_map)
+		{
+			if ((s->map[y][x] == s->num) && (!s->map[y][x]
+				|| (s->map[y][x] == '.')))
+				s->res = get_coord(s, x, y);
+		}
+	}
 }
