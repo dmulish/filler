@@ -6,7 +6,7 @@
 #    By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/18 17:00:45 by dmulish           #+#    #+#              #
-#    Updated: 2017/09/14 12:02:43 by dmulish          ###   ########.fr        #
+#    Updated: 2017/09/21 18:56:46 by dmulish          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ FLAGS = -Wall -Wextra -Werror -I includes/ -g
 
 SRCS = srcs/main.c			\
 	   srcs/read_game.c		\
+	   srcs/first_read.c	\
 	   srcs/explor_map.c	\
 
 BINS = $(SRCS:.c=.o)

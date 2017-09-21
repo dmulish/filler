@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 17:55:10 by dmulish           #+#    #+#             */
-/*   Updated: 2017/09/15 19:51:15 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/09/21 18:59:23 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,14 @@ int		main(int argc, char **argv)
 	while ((++i < argc - 1))
 		buf_len(&s, argv[i], argv[i + 1]);
 	check_usr_num(&s);
-	while (1)
-	{
-		read_game(&s);
+	first_read(&s);
+	write(1, s.res, s.res_len);
+	// free(s.res);
+	// s.res_len = 0;
+	// while (1)
+	// {
+		// read_game(&s);
 		// write(1, s.res, s.res_len);
-		write(1, "8 2\n", 4);
-	}
+	// }
 	return (0);
 }
