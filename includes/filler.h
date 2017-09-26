@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/18 16:56:16 by dmulish           #+#    #+#             */
-/*   Updated: 2017/09/21 18:33:31 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/09/26 16:33:26 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ typedef struct	s_s
 }				t_s;
 
 void			read_game(t_s *s);
-void			first_read(t_s *s);
 void			explor_map(t_s *s);
+void			first_read(t_s *s);
+void			read_piece(t_s *s);
 
 #endif

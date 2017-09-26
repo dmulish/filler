@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 17:55:10 by dmulish           #+#    #+#             */
-/*   Updated: 2017/09/21 18:59:23 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/09/26 19:37:30 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,16 @@ void	check_usr_num(t_s *s)
 	free(s->buf);
 }
 
+void	free_res(t_s *s)
+{
+	s->res_len = 0;
+	s->x_piece = 0;
+	s->y_piece = 0;
+	free(s->piece);
+	free(s->buf);
+	free(s->res);
+}
+
 int		main(int argc, char **argv)
 {
 	int	i;
@@ -74,12 +84,12 @@ int		main(int argc, char **argv)
 	check_usr_num(&s);
 	first_read(&s);
 	write(1, s.res, s.res_len);
-	// free(s.res);
-	// s.res_len = 0;
-	// while (1)
-	// {
-		// read_game(&s);
-		// write(1, s.res, s.res_len);
-	// }
+	free_res(&s);
+	while (1)
+	{
+		read_game(&s);
+		write(1, s.res, s.res_len);
+		free_res(&s);
+	}
 	return (0);
 }
