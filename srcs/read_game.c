@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 18:42:11 by dmulish           #+#    #+#             */
-/*   Updated: 2017/09/26 17:38:10 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/09/27 20:41:03 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	read_game(t_s *s)
 	{
 		if (get_next_line(0, &(s->buf)) > 0)
 		{
-			if (ft_strstr(s->buf, "000") || (i > 0 && i != s->y_map))
+			if (ft_strstr(s->buf, "000") || (i > 0 && i < s->y_map))
 				s->map[i++] = ft_strdup((ft_strsplit(s->buf, ' '))[1]);
 			else if (!ft_strncmp(s->buf, "Piece", 5))
 			{
@@ -31,14 +31,17 @@ void	read_game(t_s *s)
 			}
 		}
 	}
-	i = -1;
-	while (++i < s->y_piece)
+	i = 0;
+	while (i < s->y_piece)
 	{
 		if (get_next_line(0, &(s->buf)) > 0)
 		{
 			if (s->buf[0] == '.' || s->buf[0] == '*')
-				s->piece[i] = ft_strdup(s->buf);
+				s->piece[i++] = ft_strdup(s->buf);
 		}
 	}
 	explor_map(s);
+	// ft_putendl_fd("|||||||||||||", 2);
+	// ft_putendl_fd(s->res, 2);
+	// ft_putendl_fd("|||||||||||||", 2);
 }

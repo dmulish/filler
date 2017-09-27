@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 17:55:10 by dmulish           #+#    #+#             */
-/*   Updated: 2017/09/26 19:37:30 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/09/27 20:44:41 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,13 @@ void	init_str(t_s *s)
 	s->x_map = 0;
 	s->y_map = 0;
 	s->piece = 0;
+	s->e_num = 0;
 	s->buf = 0;
 	s->res = 0;
 	s->map = 0;
 	s->num = 0;
+	s->x = 0;
+	s->y = 0;
 }
 
 void	buf_len(t_s *s, char *param, char *usrname)
@@ -50,26 +53,41 @@ void	check_usr_num(t_s *s)
 		if (ft_strstr(s->buf, "exec p1") && ft_strstr(s->buf, "[./filler]"))
 		{
 			s->num = 'O';
+			s->e_num = 'X';
 			break ;
 		}
 		else if (ft_strstr(s->buf, "exec p2") &&
 			ft_strstr(s->buf, "[./filler]"))
 		{
 			s->num = 'X';
+			s->e_num = 'O';
 			break ;
 		}
 	}
-	free(s->buf);
+	if (s->buf)
+		free(s->buf);
 }
 
 void	free_res(t_s *s)
 {
+	int	i;
+
+	i = -1;
+	if (s->piece)
+	{
+		while (++i < s->y_piece)
+			free(s->piece[i]);
+		free(s->piece);
+	}
+	if (s->buf)
+		free(s->buf);
+	if (s->res)
+		free(s->res);
 	s->res_len = 0;
 	s->x_piece = 0;
 	s->y_piece = 0;
-	free(s->piece);
-	free(s->buf);
-	free(s->res);
+	s->x = 0;
+	s->y = 0;
 }
 
 int		main(int argc, char **argv)

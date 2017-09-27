@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/18 16:56:16 by dmulish           #+#    #+#             */
-/*   Updated: 2017/09/26 16:33:26 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/09/27 20:43:06 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 # include <unistd.h>
 # include <stdio.h>
 
-#include <fcntl.h>
-
 typedef struct	s_s
 {
+	int			x;
+	int			y;
 	int			x_map;
 	int			y_map;
 	int			x_piece;
@@ -31,6 +31,7 @@ typedef struct	s_s
 	int			res_len;
 	int			name_len;
 	char		num;
+	char		e_num;
 	char		*buf;
 	char		*res;
 	char		**map;

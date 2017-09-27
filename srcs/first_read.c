@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 14:16:52 by dmulish           #+#    #+#             */
-/*   Updated: 2017/09/26 17:37:21 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/09/27 19:58:08 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,18 @@ void	first_read_map(t_s *s)
 		{
 			if (ft_isdigit(s->buf[0]) && i != -1)
 				s->map[i] = ft_strdup((ft_strsplit(s->buf, ' '))[1]);
-			else
+			else if (!ft_strncmp(s->buf, "Piece", 5))
 				read_piece(s);
 		}
 		i++;
 	}
-	i = -1;
-	while (++i < s->y_piece)
+	i = 0;
+	while (i < s->y_piece)
 	{
 		if (get_next_line(0, &(s->buf)) > 0)
 		{
 			(s->buf[0] == '.' || s->buf[0] == '*') ?
-				s->piece[i] = ft_strdup(s->buf) : 0;
+				s->piece[i++] = ft_strdup(s->buf) : 0;
 		}
 	}
 }
@@ -53,7 +53,8 @@ void	first_read(t_s *s)
 			break ;
 		}
 	}
-	free(s->buf);
+	if (s->buf)
+		free(s->buf);
 	first_read_map(s);
 	explor_map(s);
 }

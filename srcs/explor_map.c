@@ -6,35 +6,37 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 17:48:55 by dmulish           #+#    #+#             */
-/*   Updated: 2017/09/26 19:38:01 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/09/27 20:52:54 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-int		is_fit(t_s *s, int *x, int *y)
+int		is_fit(t_s *s)
 {
 	int	i;
 	int	j;
 	int	res;
 
 	i = -1;
-	j = -1;
 	res = 0;
 	while (++i < s->y_piece)
 	{
+		j = -1;
 		while (++j < s->x_piece)
 		{
-			if (s->map[(*y) + i][(*x) + j] == s->num && s->piece[i][j] == '*')
+			if (s->map[s->y + i][s->x + j] == s->num && s->piece[i][j] == '*')
 				res++;
-			else
-				continue ;
+			if ((s->map[s->y + i][s->x + j] == s->e_num
+			|| s->map[s->y + i][s->x + j] == s->e_num + 32)
+			&& s->piece[i][j] == '*')
+				res++;
 		}
 	}
 	return (res);
 }
 
-int		inner_loop(t_s *s, int i, int *x, int *y)
+int		inner_loop(t_s *s, int i)
 {
 	int	j;
 
@@ -43,24 +45,26 @@ int		inner_loop(t_s *s, int i, int *x, int *y)
 	{
 		if (s->piece[i][j] == '*')
 		{
-			(*y) -= i;
-			(*x) -= j;
-			if ((*x) > 0 && (*y) > 0 && ((*x) + s->x_piece - 1) < s->x_map
-				&& ((*y) + s->y_piece - 1) < s->y_map && is_fit(s, x, y) == 1)
+			(s->y) -= i;
+			(s->x) -= j;
+			if ((s->x) >= 0 && (s->y) >= 0 && (s->x + s->x_piece - 1) < s->x_map
+				&& (s->y + s->y_piece - 1) < s->y_map && is_fit(s) == 1)
 				return (1);
 		}
 	}
 	return (0);
 }
 
-int		is_match(t_s *s, int *x, int *y)
+int		is_match(t_s *s, int a, int b)
 {
 	int	i;
 
 	i = -1;
+	s->x = a;
+	s->y = b;
 	while (++i < s->y_piece)
 	{
-		if (inner_loop(s, i, x, y))
+		if (inner_loop(s, i) == 1)
 			return (1);
 	}
 	return (0);
@@ -88,12 +92,16 @@ void	explor_map(t_s *s)
 		{
 			if (s->map[y][x] == s->num)
 			{
-				if (is_match(s, &x, &y))
-					s->res = get_coord(s, x, y);
-				else
-					s->res = ft_strdup("-1 -1\n");
-				return ;
+				if (is_match(s, x, y) == 1)
+				{
+					s->res = get_coord(s, s->x, s->y);
+					return ;
+				}
+				// else if (x == s->x_map - 1 && y == s->y_map - 1)
+				// 	s->res = ft_strdup("-1 -1\n");
 			}
 		}
 	}
+	s->res = ft_strdup("-1 -1\n");
+	s->res_len = 6;
 }
