@@ -6,13 +6,28 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 18:42:11 by dmulish           #+#    #+#             */
-/*   Updated: 2017/09/27 20:41:03 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/09/28 19:46:19 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-void	read_game(t_s *s)
+void	fill_piece(t_s *s)
+{
+	int	i;
+
+	i = 0;
+	while (i < s->y_piece)
+	{
+		if (get_next_line(0, &(s->buf)) > 0)
+		{
+			if (s->buf[0] == '.' || s->buf[0] == '*')
+				s->piece[i++] = ft_strdup(s->buf);
+		}
+	}
+}
+
+int		read_game(t_s *s)
 {
 	int	i;
 
@@ -30,18 +45,10 @@ void	read_game(t_s *s)
 				i = s->y_map + 1;
 			}
 		}
+		else
+			return (0);
 	}
-	i = 0;
-	while (i < s->y_piece)
-	{
-		if (get_next_line(0, &(s->buf)) > 0)
-		{
-			if (s->buf[0] == '.' || s->buf[0] == '*')
-				s->piece[i++] = ft_strdup(s->buf);
-		}
-	}
+	fill_piece(s);
 	explor_map(s);
-	// ft_putendl_fd("|||||||||||||", 2);
-	// ft_putendl_fd(s->res, 2);
-	// ft_putendl_fd("|||||||||||||", 2);
+	return (1);
 }

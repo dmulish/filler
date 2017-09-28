@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 17:55:10 by dmulish           #+#    #+#             */
-/*   Updated: 2017/09/27 21:15:28 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/09/28 20:18:30 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	init_str(t_s *s)
 	s->res = 0;
 	s->map = 0;
 	s->num = 0;
+	s->e_x = 0;
+	s->e_y = 0;
 	s->x = 0;
 	s->y = 0;
 }
@@ -86,10 +88,12 @@ void	free_res(t_s *s)
 	s->res_len = 0;
 	s->x_piece = 0;
 	s->y_piece = 0;
+	s->e_x = 0;
+	s->e_y = 0;
 	s->x = 0;
 	s->y = 0;
 }
-#include <fcntl.h>
+
 int		main(int argc, char **argv)
 {
 	int	i;
@@ -103,13 +107,11 @@ int		main(int argc, char **argv)
 	first_read(&s);
 	write(1, s.res, s.res_len);
 	free_res(&s);
-	int fd = open("log", O_TRUNC | O_CREAT | O_RDWR, 00777);
 	while (1)
 	{
-		read_game(&s);
-		write(fd, "loop\n", 5);
-		write(1, s.res, s.res_len);
-		if (ft_strequ(s.res, "-1 -1\n"))
+		if (read_game(&s) > 0)
+			write(1, s.res, s.res_len);
+		else
 			break ;
 		free_res(&s);
 	}
