@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 14:16:52 by dmulish           #+#    #+#             */
-/*   Updated: 2017/09/27 19:58:08 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/09/29 00:09:18 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,5 @@ void	first_read(t_s *s)
 	if (s->buf)
 		free(s->buf);
 	first_read_map(s);
-	explor_map(s);
+	explor_map_forw(s);
 }

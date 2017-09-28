@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 18:42:11 by dmulish           #+#    #+#             */
-/*   Updated: 2017/09/28 19:46:19 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/09/29 00:20:04 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	fill_piece(t_s *s)
 	}
 }
 
-int		read_game(t_s *s)
+int		read_game(t_s *s, int j)
 {
 	int	i;
 
@@ -49,6 +49,15 @@ int		read_game(t_s *s)
 			return (0);
 	}
 	fill_piece(s);
-	explor_map(s);
+	if (j % 2 == 0)
+	{
+		if (!explor_map_forw(s))
+			explor_map_back(s);
+	}
+	else
+	{
+		if (!explor_map_back(s))
+			explor_map_forw(s);
+	}
 	return (1);
 }

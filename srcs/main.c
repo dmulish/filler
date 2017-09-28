@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 17:55:10 by dmulish           #+#    #+#             */
-/*   Updated: 2017/09/28 20:18:30 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/09/29 00:13:06 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,11 @@ void	free_res(t_s *s)
 int		main(int argc, char **argv)
 {
 	int	i;
+	int	j;
 	t_s	s;
 
 	i = -1;
+	j = 0;
 	init_str(&s);
 	while ((++i < argc - 1))
 		buf_len(&s, argv[i], argv[i + 1]);
@@ -107,9 +109,9 @@ int		main(int argc, char **argv)
 	first_read(&s);
 	write(1, s.res, s.res_len);
 	free_res(&s);
-	while (1)
+	while (++j)
 	{
-		if (read_game(&s) > 0)
+		if (read_game(&s, j) > 0)
 			write(1, s.res, s.res_len);
 		else
 			break ;
