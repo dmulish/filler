@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 18:42:11 by dmulish           #+#    #+#             */
-/*   Updated: 2017/09/29 00:20:04 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/02 18:31:55 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int		read_game(t_s *s, int j)
 {
 	int	i;
 
+	(void)j;
 	i = 0;
 	s->buf = (char*)malloc((sizeof(char) * (s->x_map + 4)) + 1);
 	while (i <= s->y_map)
@@ -38,7 +39,27 @@ int		read_game(t_s *s, int j)
 		if (get_next_line(0, &(s->buf)) > 0)
 		{
 			if (ft_strstr(s->buf, "000") || (i > 0 && i < s->y_map))
+			{
 				s->map[i++] = ft_strdup((ft_strsplit(s->buf, ' '))[1]);
+				if (ft_strchr(s->map[i - 1], s->num))
+				{
+					s->y = i - 1;
+					s->x = s->x_map -
+						ft_strlen(ft_strchr(s->map[i - 1], s->num));
+				}
+				else if (ft_strchr(s->map[i - 1], s->e_num + 32))
+				{
+					s->e_y = i - 1;
+					s->e_x = s->x_map -
+						ft_strlen(ft_strchr(s->map[i - 1], s->e_num + 32));
+				}
+				else if (ft_strchr(s->map[i - 1], s->e_num))
+				{
+					s->e_y = i - 1;
+					s->e_x = s->x_map -
+						ft_strlen(ft_strchr(s->map[i - 1], s->e_num));
+				}
+			}
 			else if (!ft_strncmp(s->buf, "Piece", 5))
 			{
 				read_piece(s);
@@ -49,7 +70,7 @@ int		read_game(t_s *s, int j)
 			return (0);
 	}
 	fill_piece(s);
-	if (j % 2 == 0)
+	if (s->e_y < s->x)
 	{
 		if (!explor_map_forw(s))
 			explor_map_back(s);

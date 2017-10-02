@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 14:16:52 by dmulish           #+#    #+#             */
-/*   Updated: 2017/09/29 00:09:18 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/02 18:23:19 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,20 @@ void	first_read_map(t_s *s)
 		if (get_next_line(0, &(s->buf)) > 0)
 		{
 			if (ft_isdigit(s->buf[0]) && i != -1)
+			{
 				s->map[i] = ft_strdup((ft_strsplit(s->buf, ' '))[1]);
+				if (ft_strchr(s->map[i], s->num))
+				{
+					s->y = i;
+					s->x = s->x_map - ft_strlen(ft_strchr(s->map[i], s->num));
+				}
+				else if (ft_strchr(s->map[i], s->e_num))
+				{
+					s->e_y = i;
+					s->e_x =
+						s->x_map - ft_strlen(ft_strchr(s->map[i], s->e_num));
+				}
+			}
 			else if (!ft_strncmp(s->buf, "Piece", 5))
 				read_piece(s);
 		}
@@ -56,5 +69,14 @@ void	first_read(t_s *s)
 	if (s->buf)
 		free(s->buf);
 	first_read_map(s);
-	explor_map_forw(s);
+	if (s->e_y < s->x)
+	{
+		if (!explor_map_forw(s))
+			explor_map_back(s);
+	}
+	else
+	{
+		if (!explor_map_back(s))
+			explor_map_forw(s);
+	}
 }

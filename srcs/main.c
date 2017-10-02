@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 17:55:10 by dmulish           #+#    #+#             */
-/*   Updated: 2017/09/29 00:13:06 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/02 18:29:34 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,9 @@ int		main(int argc, char **argv)
 			break ;
 		free_res(&s);
 	}
+	i = -1;
+	while (++i < s.y_map)
+		free(s.map[i]);
+	free(s.map);
 	return (0);
 }
