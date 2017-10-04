@@ -6,11 +6,32 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 14:16:52 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/02 18:23:19 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/04 19:27:13 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
+
+void	first_fill_map(t_s *s, int *i)
+{
+	if (ft_isdigit(s->buf[0]) && (*i) != -1)
+	{
+		s->map[(*i)] = ft_strdup((ft_strsplit(s->buf, ' '))[1]);
+		s->pr_map[(*i)] = ft_strdup(s->map[(*i)]);
+		if (ft_strchr(s->map[(*i)], s->num))
+		{
+			s->y = (*i);
+			s->x = s->x_map - ft_strlen(ft_strchr(s->map[(*i)], s->num));
+		}
+		else if (ft_strchr(s->map[(*i)], s->e_num))
+		{
+			s->e_y = (*i);
+			s->e_x = s->x_map - ft_strlen(ft_strchr(s->map[(*i)], s->e_num));
+		}
+	}
+	else if (!ft_strncmp(s->buf, "Piece", 5))
+		read_piece(s);
+}
 
 void	first_read_map(t_s *s)
 {
@@ -18,29 +39,12 @@ void	first_read_map(t_s *s)
 
 	i = -1;
 	s->buf = (char*)malloc((sizeof(char) * (s->x_map + 4)) + 1);
+	s->pr_map = (char**)malloc((sizeof(char*) * s->y_map) + 1);
 	s->map = (char**)malloc((sizeof(char*) * s->y_map) + 1);
 	while (i <= s->y_map)
 	{
 		if (get_next_line(0, &(s->buf)) > 0)
-		{
-			if (ft_isdigit(s->buf[0]) && i != -1)
-			{
-				s->map[i] = ft_strdup((ft_strsplit(s->buf, ' '))[1]);
-				if (ft_strchr(s->map[i], s->num))
-				{
-					s->y = i;
-					s->x = s->x_map - ft_strlen(ft_strchr(s->map[i], s->num));
-				}
-				else if (ft_strchr(s->map[i], s->e_num))
-				{
-					s->e_y = i;
-					s->e_x =
-						s->x_map - ft_strlen(ft_strchr(s->map[i], s->e_num));
-				}
-			}
-			else if (!ft_strncmp(s->buf, "Piece", 5))
-				read_piece(s);
-		}
+			first_fill_map(s, &i);
 		i++;
 	}
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 18:47:03 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/02 17:50:02 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/04 18:30:15 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ int		explor_map_forw(t_s *s)
 	int	x;
 	int	y;
 
-	y = -1;
+	y = s->y - 1;
 	while (++y < s->y_map)
 	{
-		x = -1;
+		x = s->x - 1;
 		while (++x < s->x_map)
 		{
 			if (s->map[y][x] == s->num)
 			{
-				if (is_match(s, x, y) == 1)
+				if (is_match_f(s, x, y) == 1)
 				{
 					s->res = get_coord(s, s->x, s->y);
 					return (1);

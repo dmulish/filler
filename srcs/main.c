@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 17:55:10 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/02 18:29:34 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/04 19:41:37 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	init_str(t_s *s)
 	s->x_piece = 0;
 	s->y_piece = 0;
 	s->res_len = 0;
+	s->pr_map = 0;
 	s->x_map = 0;
 	s->y_map = 0;
 	s->piece = 0;
@@ -111,7 +112,7 @@ int		main(int argc, char **argv)
 	free_res(&s);
 	while (++j)
 	{
-		if (read_game(&s, j) > 0)
+		if (read_game(&s) > 0)
 			write(1, s.res, s.res_len);
 		else
 			break ;
@@ -119,7 +120,11 @@ int		main(int argc, char **argv)
 	}
 	i = -1;
 	while (++i < s.y_map)
+	{
 		free(s.map[i]);
+		free(s.pr_map[i]);
+	}
 	free(s.map);
+	free(s.pr_map);
 	return (0);
 }

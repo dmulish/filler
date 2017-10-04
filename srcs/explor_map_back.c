@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 23:45:23 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/02 17:50:35 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/04 18:15:51 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		explor_map_back(t_s *s)
 		{
 			if (s->map[y][x] == s->num)
 			{
-				if (is_match(s, x, y) == 1)
+				if (is_match_b(s, x, y) == 1)
 				{
 					s->res = get_coord_b(s, s->x, s->y);
 					return (1);
