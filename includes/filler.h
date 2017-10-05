@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/18 16:56:16 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/04 19:18:17 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/05 15:55:44 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,14 @@ typedef struct	s_s
 	char		**pr_map;
 }				t_s;
 
+int				read_game(t_s *s);
 int				explor_map_forw(t_s *s);
 int				explor_map_back(t_s *s);
-int				read_game(t_s *s);
-int				is_match_b(t_s *s, int a, int b);
-int				is_match_f(t_s *s, int a, int b);
 
 void			first_read(t_s *s);
 void			read_piece(t_s *s);
+void			check_usr_num(t_s *s);
+
+char			*get_coord(t_s *s, int x, int y);
 
 #endif

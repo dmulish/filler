@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 17:55:10 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/04 19:41:37 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/05 15:43:44 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,29 +48,6 @@ void	buf_len(t_s *s, char *param, char *usrname)
 	}
 }
 
-void	check_usr_num(t_s *s)
-{
-	s->buf = (char*)malloc((sizeof(char) * (s->name_len + 16) + 1));
-	while (get_next_line(0, &(s->buf)) > 0)
-	{
-		if (ft_strstr(s->buf, "exec p1") && ft_strstr(s->buf, "[./filler]"))
-		{
-			s->num = 'O';
-			s->e_num = 'X';
-			break ;
-		}
-		else if (ft_strstr(s->buf, "exec p2") &&
-			ft_strstr(s->buf, "[./filler]"))
-		{
-			s->num = 'X';
-			s->e_num = 'O';
-			break ;
-		}
-	}
-	if (s->buf)
-		free(s->buf);
-}
-
 void	free_res(t_s *s)
 {
 	int	i;
@@ -95,29 +72,35 @@ void	free_res(t_s *s)
 	s->y = 0;
 }
 
+void	do_it(t_s *s)
+{
+	int	j;
+
+	j = 0;
+	first_read(s);
+	write(1, s->res, s->res_len);
+	free_res(s);
+	while (++j)
+	{
+		if (read_game(s) > 0)
+			write(1, s->res, s->res_len);
+		else
+			break ;
+		free_res(s);
+	}
+}
+
 int		main(int argc, char **argv)
 {
 	int	i;
-	int	j;
 	t_s	s;
 
 	i = -1;
-	j = 0;
 	init_str(&s);
 	while ((++i < argc - 1))
 		buf_len(&s, argv[i], argv[i + 1]);
 	check_usr_num(&s);
-	first_read(&s);
-	write(1, s.res, s.res_len);
-	free_res(&s);
-	while (++j)
-	{
-		if (read_game(&s) > 0)
-			write(1, s.res, s.res_len);
-		else
-			break ;
-		free_res(&s);
-	}
+	do_it(&s);
 	i = -1;
 	while (++i < s.y_map)
 	{
