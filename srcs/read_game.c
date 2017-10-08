@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 18:42:11 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/05 15:37:29 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/08 19:22:48 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,20 +69,6 @@ void	fill_piece(t_s *s)
 	}
 }
 
-void	explor_map(t_s *s)
-{
-	if (s->e_y <= s->y)
-	{
-		if (!explor_map_forw(s))
-			explor_map_back(s);
-	}
-	else
-	{
-		if (!explor_map_back(s))
-			explor_map_forw(s);
-	}
-}
-
 int		read_game(t_s *s)
 {
 	int	i;
@@ -100,6 +86,5 @@ int		read_game(t_s *s)
 	while (++i < s->y_map)
 		s->pr_map[i] = ft_strdup(s->map[i]);
 	fill_piece(s);
-	explor_map(s);
 	return (1);
 }

@@ -1,54 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   do_it_viz.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/04 17:55:10 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/08 17:45:30 by dmulish          ###   ########.fr       */
+/*   Created: 2017/10/07 14:44:25 by dmulish           #+#    #+#             */
+/*   Updated: 2017/10/08 17:54:05 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-void	do_it(t_s *s)
+void	do_it_viz(t_s *s)
 {
 	int	j;
 
-	j = 0;
-	first_read(s);
-	write(1, s->res, s->res_len);
-	free_res(s);
-	while (++j)
+	j = -1;
+	if (read_game(s) > 0)
 	{
-		if (read_game(s) > 0)
-		{
-			explor_map(s);
-			write(1, s->res, s->res_len);
-		}
-		else
-			break ;
-		free_res(s);
+		vizual(s);
+		s->v->el = read_map(s->v->el, s, s->v);
+		while (++j < s->y_map)
+			free(s->v_map[j]);
+		free(s->v_map);
+		explor_map(s);
+		write(1, s->res, s->res_len);
 	}
-}
-
-int		main(void)
-{
-	int	i;
-	t_s	s;
-
-	i = -1;
-	init_str(&s);
-	check_usr_num(&s);
-	do_it(&s);
-	i = -1;
-	while (++i < s.y_map)
-	{
-		free(s.map[i]);
-		free(s.pr_map[i]);
-	}
-	free(s.map);
-	free(s.pr_map);
-	return (0);
+	else
+		s->fl = 1;
 }

@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 14:16:52 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/05 15:51:48 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/08 17:56:25 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,5 @@ void	first_read(t_s *s)
 	if (s->buf)
 		free(s->buf);
 	first_read_map(s);
-	if (s->e_y < s->x)
-	{
-		if (!explor_map_forw(s))
-			explor_map_back(s);
-	}
-	else
-	{
-		if (!explor_map_back(s))
-			explor_map_forw(s);
-	}
+	explor_map(s);
 }
