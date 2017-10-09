@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 15:47:09 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/08 17:30:44 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/09 15:29:15 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ int		press_but(int key, t_v *v)
 	(key == 24) ? v->fl_zin = 13 : v->fl_zin;
 	(key == 27) ? v->fl_zout = 14 : v->fl_zout;
 	(key == 34) ? iso(v) : v->rand;
-	(key == 45) ? v->fl_noise = 1 : v->rand;
-	(key == 46) ? v->fl_noise = 0 : v->rand;
 	(key == 53) ? exit(0) : v->rand;
 	(key == 123) ? v->fl_l = 3 : v->fl_l;
 	(key == 124) ? v->fl_r = 4 : v->fl_r;
