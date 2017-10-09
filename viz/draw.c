@@ -6,11 +6,28 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 15:06:24 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/09 15:32:02 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/09 18:48:23 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
+
+void	t_lst_del(t_lst *head)
+{
+	t_lst	*tmp;
+	t_lst	*next;
+
+	if (!head)
+		return ;
+	tmp = head;
+	next = tmp->next;
+	while (tmp)
+	{
+		next = tmp->next;
+		free(tmp);
+		tmp = next;
+	}
+}
 
 t_lst	*next_y(t_lst *orig, int max_x)
 {
@@ -47,4 +64,5 @@ void	draw(t_v *v)
 		line(tmp, next_y(tmp, v->max_x + 1), v);
 		tmp = tmp->next;
 	}
+	t_lst_del(tmp);
 }

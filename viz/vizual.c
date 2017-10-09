@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 15:55:33 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/09 15:02:57 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/09 20:30:03 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,13 @@ char	*trans_map(t_s *s, char *raw, int *i)
 	raw = (char*)malloc((sizeof(char) * (2 * s->x_map)) + 1);
 	while (++x_map < s->x_map)
 	{
-		if (s->map[*i][x_map] == '.')
-		{
-			raw[++x] = '0';
-			raw[++x] = (x_map != s->x_map - 1) ? ' ' : '\n';
-		}
+		if (s->map[*i][x_map] == s->num)
+			raw[++x] = '6';
+		else if (s->map[*i][x_map] == s->e_num)
+			raw[++x] = '5';
 		else
-		{
-			if (s->map[*i][x_map] == s->num)
-				raw[++x] = '6';
-			else if (s->map[*i][x_map] == s->e_num)
-				raw[++x] = '5';
-			raw[++x] = (x_map != s->x_map - 1) ? ' ' : '\n';
-		}
+			raw[++x] = '0';
+		raw[++x] = (x_map != s->x_map - 1) ? ' ' : '\n';
 	}
 	return (raw);
 }

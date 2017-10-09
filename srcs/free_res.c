@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/07 17:54:21 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/07 17:55:12 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/09 18:42:56 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@ void	free_res(t_s *s)
 			free(s->piece[i]);
 		free(s->piece);
 	}
-	if (s->buf)
-		free(s->buf);
-	if (s->res)
-		free(s->res);
+	(s->buf) ? free(s->buf) : 0;
+	(s->res) ? free(s->res) : 0;
 	s->res_len = 0;
 	s->x_piece = 0;
 	s->y_piece = 0;

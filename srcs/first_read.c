@@ -6,17 +6,31 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 14:16:52 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/08 17:56:25 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/09 18:36:26 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
+void	free_arr(char **arr)
+{
+	int	i;
+
+	i = -1;
+	while (arr[++i])
+		free(arr[i]);
+	free(arr);
+}
+
 void	first_fill_map(t_s *s, int *i)
 {
+	char	**tmp;
+
+	tmp = 0;
 	if (ft_isdigit(s->buf[0]) && (*i) != -1)
 	{
-		s->map[(*i)] = ft_strdup((ft_strsplit(s->buf, ' '))[1]);
+		tmp = ft_strsplit(s->buf, ' ');
+		s->map[(*i)] = ft_strdup(tmp[1]);
 		s->pr_map[(*i)] = ft_strdup(s->map[(*i)]);
 		if (ft_strchr(s->map[(*i)], s->num))
 		{
@@ -28,6 +42,7 @@ void	first_fill_map(t_s *s, int *i)
 			s->e_y = (*i);
 			s->e_x = s->x_map - ft_strlen(ft_strchr(s->map[(*i)], s->e_num));
 		}
+		free_arr(tmp);
 	}
 	else if (!ft_strncmp(s->buf, "Piece", 5))
 		read_piece(s);
@@ -60,13 +75,20 @@ void	first_read_map(t_s *s)
 
 void	first_read(t_s *s)
 {
+	int		i;
+	char	**tmp;
+
+	i = -1;
+	tmp = 0;
 	s->buf = (char*)malloc((sizeof(char) * 20) + 1);
 	while (get_next_line(0, &(s->buf)) > 0)
 	{
 		if (!ft_strncmp("Plateau", s->buf, 7))
 		{
-			s->x_map = ft_atoi(ft_strsplit(s->buf, ' ')[2]);
-			s->y_map = ft_atoi(ft_strsplit(s->buf, ' ')[1]);
+			tmp = ft_strsplit(s->buf, ' ');
+			s->x_map = ft_atoi(tmp[2]);
+			s->y_map = ft_atoi(tmp[1]);
+			free_arr(tmp);
 			break ;
 		}
 	}

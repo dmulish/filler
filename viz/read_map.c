@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 20:15:20 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/09 16:15:54 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/09 19:37:16 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,11 @@ t_lst	*read_map(t_lst *list, t_s *s, t_v *v)
 		arr = ft_strsplit(s->v_map[j], ' ');
 		list = push_back(list, fill_cord(arr, j, v));
 		if (fill_cord(arr, j, v) == 0)
+		{
+			(arr) ? free(arr) : 0;
 			return (0);
+		}
+		(arr) ? free(arr) : 0;
 	}
 	v->max_y = j;
 	return (list);

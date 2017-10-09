@@ -6,11 +6,28 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 19:23:36 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/09 15:29:12 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/09 17:27:48 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
+
+void	tlst_del(t_lst *head)
+{
+	t_lst	*tmp;
+	t_lst	*next;
+
+	if (!head)
+		return ;
+	tmp = head;
+	next = tmp->next;
+	while (tmp)
+	{
+		next = tmp->next;
+		free(tmp);
+		tmp = next;
+	}
+}
 
 void	init(t_v *v)
 {
@@ -47,6 +64,6 @@ void	draw_map(t_s *s)
 	while (++i < s->y_map)
 		free(s->v_map);
 	(s->v_map) ? free(s->v_map) : 0;
-	(s->v->el) ? free(s->v->el) : 0;
+	tlst_del(s->v->el);
 	(s->v) ? free(s->v) : 0;
 }
