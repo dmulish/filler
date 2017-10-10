@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 15:06:24 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/09 18:48:23 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/10 21:10:43 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	t_lst_del(t_lst *head)
 	while (tmp)
 	{
 		next = tmp->next;
-		free(tmp);
+		ft_memdel((void**)&tmp);
 		tmp = next;
 	}
 }

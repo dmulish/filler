@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 17:55:10 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/09 18:37:12 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/10 21:51:08 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,14 @@ int		main(void)
 	explor_map(&s);
 	write(1, s.res, s.res_len);
 	free_res(&s);
-	if (get_next_line(0, &(s.buf)) > 0 && s.fl)
+	if (!s.fl)
 		draw_map(&s);
 	while (++i < s.y_map)
 	{
-		free(s.map[i]);
-		free(s.pr_map[i]);
+		ft_memdel((void**)&s.map[i]);
+		ft_memdel((void**)&s.pr_map[i]);
 	}
-	(s.map) ? free(s.map) : 0;
-	(s.pr_map) ? free(s.pr_map) : 0;
-	free(&s);
+	ft_memdel((void**)&s.map);
+	ft_memdel((void**)&s.pr_map);
 	return (0);
 }

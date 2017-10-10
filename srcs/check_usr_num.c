@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 15:40:19 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/09 18:22:55 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/10 20:33:52 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ void	check_usr_num(t_s *s)
 				check_usr_func(s);
 				break ;
 			}
-			(s->buf) ? free(s->buf) : 0;
+			ft_memdel((void**)&s->buf);
 		}
 		else
 			break ;
 	}
-	(s->buf) ? free(s->buf) : 0;
+	ft_memdel((void**)&s->buf);
 }

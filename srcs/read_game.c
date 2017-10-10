@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 18:42:11 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/09 18:53:07 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/10 21:14:43 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,18 @@ void	get_map_cord(t_s *s, int *i)
 
 void	fill_map(t_s *s, int *i)
 {
+	int		j;
+	char	**tmp;
+
+	j = -1;
 	if (ft_strstr(s->buf, "000") || ((*i) > 0 && (*i) < s->y_map))
 	{
-		s->map[(*i)++] = ft_strdup((ft_strsplit(s->buf, ' '))[1]);
+		tmp = ft_strsplit(s->buf, ' ');
+		s->map[(*i)++] = ft_strdup(tmp[1]);
 		get_map_cord(s, i);
+		while (tmp[++j])
+			ft_memdel((void**)&tmp[j]);
+		ft_memdel((void**)&tmp);
 	}
 	else if (!ft_strncmp(s->buf, "Piece", 5))
 	{
@@ -61,11 +69,13 @@ void	fill_piece(t_s *s)
 	i = 0;
 	while (i < s->y_piece)
 	{
+		s->buf = (char*)malloc(sizeof(char) * (s->x_map + 5));
 		if (get_next_line(0, &(s->buf)) > 0)
 		{
 			if (s->buf[0] == '.' || s->buf[0] == '*')
 				s->piece[i++] = ft_strdup(s->buf);
 		}
+		ft_memdel((void**)&s->buf);
 	}
 }
 
@@ -74,13 +84,17 @@ int		read_game(t_s *s)
 	int	i;
 
 	i = 0;
-	s->buf = (char*)malloc((sizeof(char) * (s->x_map + 4)) + 1);
 	while (i <= s->y_map)
 	{
+		s->buf = (char*)malloc(sizeof(char) * (s->x_map + 5));
 		if (get_next_line(0, &(s->buf)) > 0)
 			fill_map(s, &i);
 		else
+		{
+			ft_memdel((void**)&s->buf);
 			return (0);
+		}
+		ft_memdel((void**)&s->buf);
 	}
 	i = -1;
 	while (++i < s->y_map)

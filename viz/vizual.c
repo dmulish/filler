@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 15:55:33 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/09 20:30:03 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/10 21:04:10 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*trans_map(t_s *s, char *raw, int *i)
 
 	x = -1;
 	x_map = -1;
-	raw = (char*)malloc((sizeof(char) * (2 * s->x_map)) + 1);
+	raw = ft_strnew(2 * s->x_map + 1);
 	while (++x_map < s->x_map)
 	{
 		if (s->map[*i][x_map] == s->num)
@@ -38,7 +38,8 @@ void	vizual(t_s *s)
 	int		i;
 
 	i = -1;
-	s->v_map = (char**)malloc((sizeof(char*) * s->y_map) + 1);
+	s->v_map = (char**)malloc(sizeof(char*) * (s->y_map + 1));
+	s->v_map[s->y_map] = NULL;
 	while (++i < s->y_map)
 		s->v_map[i] = trans_map(s, s->v_map[i], &i);
 }

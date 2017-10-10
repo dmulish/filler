@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 17:55:10 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/08 17:45:30 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/10 21:08:12 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,13 @@ void	do_it(t_s *s)
 
 	j = 0;
 	first_read(s);
+	explor_map(s);
 	write(1, s->res, s->res_len);
 	free_res(s);
-	while (++j)
+	while (read_game(s))
 	{
-		if (read_game(s) > 0)
-		{
-			explor_map(s);
-			write(1, s->res, s->res_len);
-		}
-		else
-			break ;
+		explor_map(s);
+		write(1, s->res, s->res_len);
 		free_res(s);
 	}
 }
@@ -42,13 +38,12 @@ int		main(void)
 	init_str(&s);
 	check_usr_num(&s);
 	do_it(&s);
-	i = -1;
 	while (++i < s.y_map)
 	{
-		free(s.map[i]);
-		free(s.pr_map[i]);
+		ft_memdel((void**)&s.map[i]);
+		ft_memdel((void**)&s.pr_map[i]);
 	}
-	free(s.map);
-	free(s.pr_map);
+	ft_memdel((void**)&s.map);
+	ft_memdel((void**)&s.pr_map);
 	return (0);
 }

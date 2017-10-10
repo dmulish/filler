@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/08 17:17:44 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/09 18:37:19 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/10 18:09:18 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	init_str(t_s *s)
 {
-	s = (t_s*)malloc(sizeof(t_s));
 	s->name_len = 0;
 	s->x_piece = 0;
 	s->y_piece = 0;

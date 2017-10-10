@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 15:34:07 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/09 16:16:10 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/10 21:52:34 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_lst	*new_elem(char *arr, int i, int j)
 	char	*col;
 	t_lst	*el;
 
-	if (!(el = (t_lst*)malloc(sizeof(t_lst) + 1)))
+	if (!(el = (t_lst*)malloc(sizeof(t_lst))))
 		return (0);
 	el->x = i + 1;
 	el->y = j + 1;

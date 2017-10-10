@@ -6,11 +6,23 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 20:15:20 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/09 19:37:16 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/10 21:40:32 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
+
+void	free_arr(char **arr)
+{
+	int	i;
+
+	i = -1;
+	if (!arr)
+		return ;
+	while (arr[++i])
+		ft_memdel((void**)&arr[i]);
+	ft_memdel((void**)&arr);
+}
 
 t_lst	*push_back(t_lst *old, t_lst *new1)
 {
@@ -61,10 +73,10 @@ t_lst	*read_map(t_lst *list, t_s *s, t_v *v)
 		list = push_back(list, fill_cord(arr, j, v));
 		if (fill_cord(arr, j, v) == 0)
 		{
-			(arr) ? free(arr) : 0;
+			free_arr(arr);
 			return (0);
 		}
-		(arr) ? free(arr) : 0;
+		free_arr(arr);
 	}
 	v->max_y = j;
 	return (list);
