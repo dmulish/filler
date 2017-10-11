@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 17:55:10 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/10 21:08:12 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/11 00:25:53 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void	do_it(t_s *s)
 {
-	int	j;
-
-	j = 0;
 	first_read(s);
 	explor_map(s);
 	write(1, s->res, s->res_len);

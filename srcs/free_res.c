@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/07 17:54:21 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/10 18:39:32 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/11 01:57:33 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	free_res(t_s *s)
 	i = -1;
 	while (s->piece[++i])
 		ft_memdel((void**)&s->piece[i]);
+	ft_memdel((void**)&s->piece);
 	ft_memdel((void**)&s->buf);
 	ft_memdel((void**)&s->res);
 	s->res_len = 0;

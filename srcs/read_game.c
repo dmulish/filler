@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 18:42:11 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/10 21:14:43 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/11 02:22:18 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 void	get_map_cord(t_s *s, int *i)
 {
 	int	x;
-	int	y;
 
 	x = 0;
-	y = 0;
 	if (!s->y && !s->x && ft_strchr(s->map[(*i) - 1], s->num))
 	{
 		s->y = (*i) - 1;
@@ -86,7 +84,8 @@ int		read_game(t_s *s)
 	i = 0;
 	while (i <= s->y_map)
 	{
-		s->buf = (char*)malloc(sizeof(char) * (s->x_map + 5));
+		// s->buf = (char*)malloc(sizeof(char) * (s->x_map + 5));
+		s->buf = NULL;
 		if (get_next_line(0, &(s->buf)) > 0)
 			fill_map(s, &i);
 		else

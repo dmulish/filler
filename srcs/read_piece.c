@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/26 16:32:33 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/10 20:28:45 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/11 01:07:56 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,5 @@ void	read_piece(t_s *s)
 	s->piece[s->y_piece] = NULL;
 	while (tmp[++i])
 		ft_memdel((void**)&tmp[i]);
+	ft_memdel((void**)&tmp);
 }

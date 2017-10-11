@@ -6,7 +6,7 @@
 #    By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/18 17:00:45 by dmulish           #+#    #+#              #
-#    Updated: 2017/10/10 18:29:51 by dmulish          ###   ########.fr        #
+#    Updated: 2017/10/11 02:47:24 by vrybalko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,11 @@ NAME1 = filler
 NAME2 = vizual_filler
 
 FLAGS = -Wall -Wextra -Werror -I includes/ -g
-MLX_FL = -lmlx -framework OpenGL -framework AppKit
+ifeq ($(shell uname -s),Darwin)
+	MLX_FL = -lmlx -framework OpenGL -framework AppKit
+else
+	MLX_FL = -lmlx -lXext -lX11 -lm
+endif
 
 FSRC = srcs/main.c
 CSRC = srcs/free_res.c			\
@@ -51,11 +55,11 @@ LIBMLX = -L minilibx -lmlx
 all: $(NAME1) $(NAME2)
 
 $(NAME1): $(FBIN) $(CBIN)
-	make -C libft/
+	make -j4 -C libft/
 	gcc -o $(NAME1) $(FLAGS) $(FBIN) $(CBIN) $(LIB)
 
 $(NAME2): $(VBIN) $(CBIN)
-	make -C minilibx/
+	#make -C minilibx/
 	gcc -o $(NAME2) $(FLAGS) $(VBIN) $(CBIN) $(MLX_FL) $(MLXLIB) $(LIB)
 
 %.o: %.c
@@ -64,7 +68,7 @@ $(NAME2): $(VBIN) $(CBIN)
 clean:
 	/bin/rm -f $(FBIN) $(CBIN) $(VBIN)
 	make -C libft/ clean
-	make -C minilibx/ clean
+	#make -C minilibx/ clean
 
 fclean: clean
 	/bin/rm -f $(NAME1) $(NAME2)

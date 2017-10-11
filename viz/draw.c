@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 15:06:24 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/10 21:10:43 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/11 02:56:53 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ void	draw(t_v *v)
 		line(tmp, next_y(tmp, v->max_x + 1), v);
 		tmp = tmp->next;
 	}
-	t_lst_del(tmp);
+	// t_lst_del(tmp); tmp tut NULL!!
+	t_lst_del(v->el);
 }
