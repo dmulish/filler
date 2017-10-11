@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/07 14:44:25 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/11 17:19:23 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/10/11 22:15:11 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	do_it_viz(t_s *s)
 	j = -1;
 	if (read_game(s) > 0)
 	{
+		tlst_del(&(s->v->el));
 		vizual(s);
 		s->v->el = NULL;
 		s->v->el = read_map(s->v->el, s, s->v);

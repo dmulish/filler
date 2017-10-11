@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 15:40:19 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/11 00:56:58 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/10/11 22:17:47 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,20 @@ void	check_usr_num(t_s *s)
 {
 	while (get_next_line(0, &(s->buf)) > 0)
 	{
-		/* (!s->buf) ? s->buf = (char*)malloc((sizeof(char) * (100) + 1)) : 0; */
-		/* if (get_next_line(0, &(s->buf)) > 0) */
-		/* { */
-			if (ft_strstr(s->buf, "exec p1") && (ft_strstr(s->buf, "[./filler]")
+		if (ft_strstr(s->buf, "exec p1") && (ft_strstr(s->buf, "[./filler]")
 			|| ft_strstr(s->buf, "[./vizual_filler]")))
-			{
-				check_usr_func(s);
-				break ;
-			}
-			else if (ft_strstr(s->buf, "exec p2")
-			&& (ft_strstr(s->buf, "[./filler]")
-			|| ft_strstr(s->buf, "[./vizual_filler]")))
-			{
-				check_usr_func(s);
-				break ;
-			}
-			ft_memdel((void**)&s->buf);
-		/* } */
-		/* else */
-		/* 	break ; */
+		{
+			check_usr_func(s);
+			break ;
+		}
+		else if (ft_strstr(s->buf, "exec p2")
+				&& (ft_strstr(s->buf, "[./filler]")
+				|| ft_strstr(s->buf, "[./vizual_filler]")))
+		{
+			check_usr_func(s);
+			break ;
+		}
+		ft_memdel((void**)&s->buf);
 	}
 	ft_memdel((void**)&s->buf);
 }

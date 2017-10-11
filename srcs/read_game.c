@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 18:42:11 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/11 17:18:34 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/10/11 22:06:43 by dmulish          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	fill_piece(t_s *s)
 	i = 0;
 	while (i < s->y_piece)
 	{
-		// s->buf = (char*)malloc(sizeof(char) * (s->x_map + 6));
 		s->buf = NULL;
 		if (get_next_line(0, &(s->buf)) > 0)
 		{
@@ -86,7 +85,6 @@ int		read_game(t_s *s)
 	i = 0;
 	while (i <= s->y_map)
 	{
-		// s->buf = (char*)malloc(sizeof(char) * (s->x_map + 5));
 		s->buf = NULL;
 		if (get_next_line(0, &(s->buf)) > 0)
 			fill_map(s, &i);
