@@ -6,27 +6,27 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 19:23:36 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/11 02:50:32 by vrybalko         ###   ########.fr       */
+/*   Updated: 2017/10/11 16:53:16 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-void	tlst_del(t_lst *head)
+void	tlst_del(t_lst **head)
 {
 	t_lst	*tmp;
 	t_lst	*next;
 
-	if (!head)
+	if (!head || !*head)
 		return ;
-	tmp = head;
-	next = tmp->next;
+	tmp = *head;
 	while (tmp)
 	{
 		next = tmp->next;
 		free(tmp);
 		tmp = next;
 	}
+	*head = NULL;
 }
 
 void	init(t_v *v)
@@ -60,11 +60,10 @@ void	draw_map(t_s *s)
 	i = -1;
 	s->v = (t_v*)malloc(sizeof(t_v) + 1);
 	init(s->v);
-	tlst_del(s->v->el);
 	draw_grid(s);
 	while (++i < s->y_map)
 		free(s->v_map);
 	(s->v_map) ? free(s->v_map) : 0;
-	tlst_del(s->v->el);
+	tlst_del(&(s->v->el));
 	(s->v) ? free(s->v) : 0;
 }

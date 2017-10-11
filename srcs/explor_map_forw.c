@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 18:47:03 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/05 15:55:46 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/11 17:01:28 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,14 @@ int		explor_map_forw(t_s *s)
 			{
 				if (is_match_f(s, x, y) == 1)
 				{
+					ft_memdel((void**)&s->res);
 					s->res = get_coord(s, s->x, s->y);
 					return (1);
 				}
 			}
 		}
 	}
+	ft_memdel((void**)&s->res);
 	s->res = ft_strdup("0 0\n");
 	s->res_len = 4;
 	return (0);

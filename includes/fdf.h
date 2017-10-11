@@ -6,7 +6,7 @@
 /*   By: dmulish <dmulish@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 15:54:39 by dmulish           #+#    #+#             */
-/*   Updated: 2017/10/09 16:12:59 by dmulish          ###   ########.fr       */
+/*   Updated: 2017/10/11 17:03:45 by vrybalko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 
 typedef struct		s_lst
 {
+	struct s_lst	*next;
 	int				x;
 	int				y;
 	int				z;
@@ -36,7 +37,6 @@ typedef struct		s_lst
 	int				y1;
 	int				z1;
 	int				col;
-	struct s_lst	*next;
 }					t_lst;
 
 typedef struct		s_d
@@ -92,5 +92,7 @@ void				line(t_lst *d0, t_lst *d1, t_v *v);
 
 t_lst				*rot(t_lst *lst, t_v *v);
 t_lst				*new_elem(char *arr, int i, int j);
+void				tlst_del(t_lst **head);
+void				free_arr(char **arr);
 
 #endif
